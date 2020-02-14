@@ -136,7 +136,7 @@
             $mail->IsSMTP();
             $mail->Host = SMTP_SERVER;
 			$mail->SMTPKeepAlive = true;
-			$mail->SMTPDebug = 2;  
+			//$mail->SMTPDebug = 2;  
 
             if (SMTP_IS_AUTHENTICATION) {
                 $mail->SMTPAuth = true;
