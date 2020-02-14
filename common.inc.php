@@ -8,9 +8,12 @@
 	define("VERSION", "3.4");
 	define("OFFICIAL_PAGE_URL", "https://github.com/tin-cat/emailqueue");
 
-	require_once(dirname(__FILE__)."/vendor/PHPMailer/PHPMailer/src/Exception.php");
+	echo dirname(__FILE__);
+
 	require_once(dirname(__FILE__)."/vendor/PHPMailer/PHPMailer/src/PHPMailer.php");
-	
+	require_once(dirname(__FILE__)."/vendor/PHPMailer/PHPMailer/src/Exception.php");
+	require_once(dirname(__FILE__)."/vendor/PHPMailer/PHPMailer/src/SMTP.php");
+
 	require_once(dirname(__FILE__)."/config/db.config.inc.php");
 	require_once(dirname(__FILE__)."/config/application.config.inc.php");
 	
@@ -134,14 +137,28 @@
         if (SEND_METHOD == "smtp") {
             $mail->IsSMTP();
             $mail->Host = SMTP_SERVER;
-            $mail->SMTPKeepAlive = true;
+			$mail->SMTPKeepAlive = true;
+			$mail->SMTPDebug = 2;  
 
             if (SMTP_IS_AUTHENTICATION) {
                 $mail->SMTPAuth = true;
                 $mail->Port = SMTP_PORT;
                 $mail->Username = SMTP_AUTHENTICATION_USERNAME;
-                $mail->Password = SMTP_AUTHENTICATION_PASSWORD;
-            }
+				$mail->Password = SMTP_AUTHENTICATION_PASSWORD;
+			}
+			if (!SMTP_IS_AUTHENTICATION) {
+				$mail->SMTPAuth = false;
+				$mail->SMTPAutoTLS = false;
+				$mail->Port = SMTP_PORT;
+				$mail->Username = SMTP_AUTHENTICATION_USERNAME;
+				$mail->Password = SMTP_AUTHENTICATION_PASSWORD;
+				$mail->SMTPOptions = array(
+					'ssl' => array(
+						'verify_peer' => false,
+						'verify_peer_name' => false,
+						'allow_self_signed' => true
+					));
+			}
         }
         else if (SEND_METHOD == "sendmail")
         	$mail->IsSendmail();

@@ -6,8 +6,11 @@
 <hr>
 <?php
 
-	#define("EMAILQUEUE_DIR", ""); // Set this to your Emailqueue's installation directory.
-	define("EMAILQUEUE_DIR", "/Applications/XAMPP/xamppfiles/htdocs/emailqueue/"); // Set this to your Emailqueue's installation directory.
+	#Local
+	#define("EMAILQUEUE_DIR", "/Applications/XAMPP/xamppfiles/htdocs/emailqueue/"); // Set this to your Emailqueue's installation directory.
+	
+	#GoDaddy
+	define("EMAILQUEUE_DIR", "/home/sbk7aofc7bpk/public_html/emailqueue/"); // Set this to your Emailqueue's installation directory.
 
     include_once EMAILQUEUE_DIR."config/application.config.inc.php"; // Include emailqueue configuration.
     include_once EMAILQUEUE_DIR."config/db.config.inc.php"; // Include Emailqueue's database connection configuration.
