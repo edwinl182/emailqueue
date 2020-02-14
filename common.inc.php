@@ -8,8 +8,6 @@
 	define("VERSION", "3.4");
 	define("OFFICIAL_PAGE_URL", "https://github.com/tin-cat/emailqueue");
 
-	echo dirname(__FILE__);
-
 	require_once(dirname(__FILE__)."/vendor/PHPMailer/PHPMailer/src/PHPMailer.php");
 	require_once(dirname(__FILE__)."/vendor/PHPMailer/PHPMailer/src/Exception.php");
 	require_once(dirname(__FILE__)."/vendor/PHPMailer/PHPMailer/src/SMTP.php");
