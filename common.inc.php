@@ -1,13 +1,16 @@
 <?php
 
 	use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-
+	use PHPMailer\PHPMailer\Exception;
+	
 	namespace Emailqueue;
 
 	define("VERSION", "3.4");
 	define("OFFICIAL_PAGE_URL", "https://github.com/tin-cat/emailqueue");
 
+	require_once(dirname(__FILE__)."/vendor/PHPMailer/PHPMailer/src/Exception.php");
+	require_once(dirname(__FILE__)."/vendor/PHPMailer/PHPMailer/src/PHPMailer.php");
+	
 	require_once(dirname(__FILE__)."/config/db.config.inc.php");
 	require_once(dirname(__FILE__)."/config/application.config.inc.php");
 	
@@ -23,8 +26,9 @@
 		EMAILQUEUE_DB_PWD,
 		EMAILQUEUE_DB_DATABASE
 	);
+
 	if (!$db->connect()) {
-		throw new EmailqueueException("Cannot connect to database");
+		throw new \Exception("Cannot connect to database");
 		die;
 	}
 	
